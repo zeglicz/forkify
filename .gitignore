@@ -1,0 +1,13 @@
+# workspace
+.idea/
+.vscode/
+.history/
+
+# cache
+.DS_Store
+
+# parcel
+.cache
+.parcel-cache/
+node_modules/
+dist/
