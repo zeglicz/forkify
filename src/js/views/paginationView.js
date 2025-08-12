@@ -21,48 +21,33 @@ class PaginationView extends View {
 
         // Page 1, and there are other pages
         if (curPage === 1 && numPages > 1) {
-            return `
-                <button class="btn--inline pagination__btn--next" data-goto="${curPage + 1}">
-                    <span>Page ${curPage + 1}</span>
-                    <svg class="search__icon">
-                    <use href="${icons}#icon-arrow-right"></use>
-                    </svg>
-                </button>
-            `;
+            return this._generateMarkupButton("next", curPage);
         }
 
         // Last page
         if (curPage === numPages && numPages > 1) {
-            return `
-                <button class="btn--inline pagination__btn--prev" data-goto="${curPage - 1}">
-                    <span>Page ${curPage - 1}</span>
-                    <svg class="search__icon">
-                    <use href="${icons}#icon-arrow-left"></use>
-                    </svg>
-                </button>
-            `;
+            return this._generateMarkupButton("prev", curPage);
         }
 
         // Other page
         if (curPage < numPages) {
-            return `
-                <button class="btn--inline pagination__btn--prev" data-goto="${curPage - 1}">
-                    <span>Page ${curPage - 1}</span>
-                    <svg class="search__icon">
-                    <use href="${icons}#icon-arrow-left"></use>
-                    </svg>
-                </button>
-                <button class="btn--inline pagination__btn--next" data-goto="${curPage + 1}">
-                    <span>Page ${curPage + 1}</span>
-                    <svg class="search__icon">
-                    <use href="${icons}#icon-arrow-right"></use>
-                    </svg>
-                </button>
-            `;
+            return this._generateMarkupButton("next", curPage) + this._generateMarkupButton("prev", curPage);
         }
 
         // Page 1, and there are NOT other pages
         return "";
+    }
+
+    _generateMarkupButton(direction, curPage) {
+        const page = direction === "next" ? curPage + 1 : curPage - 1;
+        return `
+            <button class="btn--inline pagination__btn--${direction}" data-goto="${page}">
+                    <span>Page ${page}</span>
+                    <svg class="search__icon">
+                    <use href="${icons}#icon-arrow-${direction === "next" ? "right" : "left"}"></use>
+                    </svg>
+            </button>
+        `;
     }
 }
 
