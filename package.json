@@ -7,7 +7,7 @@
     },
     "scripts": {
         "start": "parcel index.html",
-        "build": "parcel build index.html"
+        "build": "parcel build index.html --dist-dir ./build --no-optimize"
     },
     "repository": {
         "type": "git",
